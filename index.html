@@ -7,44 +7,74 @@
   <link rel="stylesheet" href="style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<script>
+  const toggleBtn = document.querySelector(".nav-toggle");
+  const navMenu = document.querySelector(".nav");
+  const dropdown = document.querySelector(".dropdown");
+  const dropdownToggle = document.querySelector(".dropdown-toggle");
+
+  // Abrir/cerrar menu principal (móvil)
+  toggleBtn.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("is-open");
+    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Abrir/cerrar dropdown (móvil)
+  dropdownToggle.addEventListener("click", () => {
+    dropdown.classList.toggle("is-open");
+  });
+
+  // Cerrar menú al tocar un link (móvil)
+  navMenu.querySelectorAll("a.nav-link, a.nav-cta").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("is-open");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      dropdown.classList.remove("is-open");
+    });
+  });
+</script>
 <body>
-  
+
   <!-- NAVBAR -->
   <header class="navbar">
-    <div class="container nav-inner">
+  <div class="container nav-inner">
 
-      <!-- Brand -->
-      <a class="brand" href="#">
-        <img src="logo.PNG" alt="Bravika Logo" class="brand-logo" />
-      </a>
+    <a class="brand" href="#">
+      <img src="logo.PNG" alt="Bravika Logo" class="brand-logo" />
+    </a>
 
-      <!-- Menu -->
-      <nav class="nav">
-        <a class="nav-link" href="#home">Home</a>
+    <!-- Botón hamburguesa (solo móvil) -->
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      ☰
+    </button>
 
-        <div class="dropdown">
-          <a class="nav-link" href="#services">Services</a>
-          <div class="dropdown-menu">
-            <a href="#pressure-washing">Pressure Washing</a>
-            <a href="#concrete-repair">Concrete Repair</a>
-            <a href="#painting">Painting</a>
-            <a href="#caulking">Caulking / Apply</a>
-            <a href="#rope-access">Rope Access</a>
-            <a href="#leak-repair">Leaking Repair</a>
-          </div>
+    <nav class="nav" id="mainNav">
+      <a class="nav-link" href="#home">Home</a>
+
+      <div class="dropdown">
+        <button class="nav-link dropdown-toggle" type="button">
+          Services ▾
+        </button>
+        <div class="dropdown-menu">
+          <a href="#pressure-washing">Pressure Washing</a>
+          <a href="#concrete-repair">Concrete Repair</a>
+          <a href="#painting">Painting</a>
+          <a href="#caulking">Caulking / Apply</a>
+          <a href="#rope-access">Rope Access</a>
+          <a href="#leak-repair">Leaking Repair</a>
         </div>
+      </div>
 
-        <a class="nav-link" href="#company">Company</a>
-        <a class="nav-link" href="#contact">Contact</a>
-      </nav>
+      <a class="nav-link" href="#company">Company</a>
+      <a class="nav-link" href="#contact">Contact</a>
 
-      <!-- CTA -->
-      <a class="cta" href="https://wa.me/16725582342" target="_blank" rel="noopener">
+      <a class="cta-button" href="https://wa.me/16725582342" target="_blank">
         Get a Free Quote
       </a>
+    </nav>
 
-    </div>
-  </header>
+  </div>
+</header>
 
   <!-- HERO -->
   <main id="home" class="hero">
