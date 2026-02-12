@@ -1,24 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bravika Exterior Services</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bravika Exterior Services</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="top-bar">
-    <img src="logo.PNG" class="logo">
-    <img src="animacion.PNG" class="animation">
-  </div>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-inner">
 
-  <div class="hero">
-    <h1>BRAVIKA EXTERIOR SERVICES</h1>
-    <p>Professional Rope Access & Exterior Maintenance in BC</p>
+      <!-- Brand -->
+      <a class="brand" href="#">
+        <img src="logo.PNG" alt="Bravika Logo" class="brand-logo" />
+      </a>
 
-    <a href="https://wa.me/16725582342" target="_blank" class="cta-button">
-      GET A FREE QUOTE
-    </a>
-  </div>
+      <!-- Menu -->
+      <nav class="nav">
+        <a class="nav-link" href="#home">Home</a>
+
+        <div class="dropdown">
+          <a class="nav-link" href="#services">Services</a>
+          <div class="dropdown-menu">
+            <a href="#pressure-washing">Pressure Washing</a>
+            <a href="#concrete-repair">Concrete Repair</a>
+            <a href="#painting">Painting</a>
+            <a href="#caulking">Caulking / Apply</a>
+            <a href="#rope-access">Rope Access</a>
+            <a href="#leak-repair">Leaking Repair</a>
+          </div>
+        </div>
+
+        <a class="nav-link" href="#company">Company</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+
+      <!-- CTA -->
+      <a class="cta" href="https://wa.me/16725582342" target="_blank" rel="noopener">
+        Get a Free Quote
+      </a>
+
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="home" class="hero">
+    <div class="hero-content">
+      <h1>BRAVIKA EXTERIOR SERVICES</h1>
+      <p>Professional Rope Access & Exterior Maintenance in BC</p>
+
+      <!-- si quieres animación, descomenta estas líneas -->
+      <!-- <img src="animacion.PNG" alt="Bravika Animation" class="hero-animation" /> -->
+    </div>
+  </main>
 
 </body>
 </html>
