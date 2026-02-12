@@ -64,28 +64,50 @@
 <script>
   const toggleBtn = document.querySelector(".nav-toggle");
   const navMenu = document.querySelector(".nav");
+
   const dropdown = document.querySelector(".dropdown");
   const dropdownToggle = document.querySelector(".dropdown-toggle");
+  const dropdownMenu = document.querySelector(".dropdown-menu");
 
-  // Abrir/cerrar menu principal (móvil)
-  toggleBtn.addEventListener("click", () => {
+  // Abrir/cerrar menú principal (móvil)
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     const isOpen = navMenu.classList.toggle("is-open");
     toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+    // si cierras el menú, también cierra el dropdown
+    if (!isOpen) dropdown.classList.remove("is-open");
   });
 
   // Abrir/cerrar dropdown (móvil)
-  dropdownToggle.addEventListener("click", () => {
+  dropdownToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // asegúrate que el menú principal esté abierto
+    navMenu.classList.add("is-open");
+    toggleBtn.setAttribute("aria-expanded", "true");
+
     dropdown.classList.toggle("is-open");
   });
 
-  // Cerrar menú al tocar un link (móvil)
-  navMenu.querySelectorAll("a.nav-link, a.cta-button").forEach(link => {
+  // Cerrar al tocar links (Home/Company/Contact y también links del dropdown)
+  navMenu.querySelectorAll("a.nav-link, a.cta-button, .dropdown-menu a").forEach((link) => {
     link.addEventListener("click", () => {
       navMenu.classList.remove("is-open");
       toggleBtn.setAttribute("aria-expanded", "false");
       dropdown.classList.remove("is-open");
     });
   });
-</script>
-</body>
+
+  // Evita que el dropdown se cierre raro cuando tocas dentro del menú
+  dropdownMenu.addEventListener("click", (e) => e.stopPropagation());
+
+  // Tocar fuera cierra todo
+  document.addEventListener("click", () => {
+    navMenu.classList.remove("is-open");
+    toggleBtn.setAttribute("aria-expanded", "false");
+    dropdown.classList.remove("is-open");
+  });
+</script></body>
 </html>
