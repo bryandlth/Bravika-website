@@ -5,34 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bravika Exterior Services</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
-<script>
-  const toggleBtn = document.querySelector(".nav-toggle");
-  const navMenu = document.querySelector(".nav");
-  const dropdown = document.querySelector(".dropdown");
-  const dropdownToggle = document.querySelector(".dropdown-toggle");
 
-  // Abrir/cerrar menu principal (móvil)
-  toggleBtn.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("is-open");
-    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-  });
-
-  // Abrir/cerrar dropdown (móvil)
-  dropdownToggle.addEventListener("click", () => {
-    dropdown.classList.toggle("is-open");
-  });
-
-  // Cerrar menú al tocar un link (móvil)
-  navMenu.querySelectorAll("a.nav-link, a.nav-cta").forEach(link => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("is-open");
-      toggleBtn.setAttribute("aria-expanded", "false");
-      dropdown.classList.remove("is-open");
-    });
-  });
-</script>
 <body>
 
   <!-- NAVBAR -->
@@ -86,6 +61,31 @@
       <!-- <img src="animacion.PNG" alt="Bravika Animation" class="hero-animation" /> -->
     </div>
   </main>
+<script>
+  const toggleBtn = document.querySelector(".nav-toggle");
+  const navMenu = document.querySelector(".nav");
+  const dropdown = document.querySelector(".dropdown");
+  const dropdownToggle = document.querySelector(".dropdown-toggle");
 
+  // Abrir/cerrar menu principal (móvil)
+  toggleBtn.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("is-open");
+    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Abrir/cerrar dropdown (móvil)
+  dropdownToggle.addEventListener("click", () => {
+    dropdown.classList.toggle("is-open");
+  });
+
+  // Cerrar menú al tocar un link (móvil)
+  navMenu.querySelectorAll("a.nav-link, a.cta-button").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("is-open");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      dropdown.classList.remove("is-open");
+    });
+  });
+</script>
 </body>
 </html>
