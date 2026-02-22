@@ -1,113 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bravika Exterior Services</title>
-  <link rel="stylesheet" href="style.css" />
-
+  <meta name="description" content="Professional exterior maintenance: pressure washing, leak repair, window replacement, caulking, polyurethane injection, and balcony waterproof membranes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <header class="site-header" id="home">
+    <nav class="nav-wrap container">
+      <a class="brand" href="#home" aria-label="Bravika home">
+        <img class="brand-logo" src="logo.PNG" alt="Bravika Exterior Services">
+      </a>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-  <div class="container nav-inner">
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Open menu">
+      <label class="menu-icon" for="menu-toggle"><span></span></label>
 
-    <a class="brand" href="#">
-      <img src="logo.PNG" alt="Bravika Logo" class="brand-logo" />
-    </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#safety">Why Us?</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
 
-    <!-- Botón hamburguesa (solo móvil) -->
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-      ☰
-    </button>
+      <a class="cta-btn" href="#contact">Get Quote</a>
+    </nav>
+  </header>
 
-    <nav class="nav" id="mainNav">
-      <a class="nav-link" href="#home">Home</a>
+  <main>
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Serving Greater Vancouver | Rope Access Specialists</p>
+          <h1>
+            Exterior maintenance
+            <span>with rope access expertise</span>
+          </h1>
+          <p>
+            Bravika Exterior Services delivers high-impact solutions for buildings,
+            condos, and parkades with direct owner supervision and specialized rope
+            access for hard-to-reach areas.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Request Quote</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+          </div>
+        </div>
 
-      <div class="dropdown">
-        <button class="nav-link dropdown-toggle" type="button">
-          Services ▾
-        </button>
-        <div class="dropdown-menu">
-          <a href="#pressure-washing">Pressure Washing</a>
-          <a href="#concrete-repair">Concrete Repair</a>
-          <a href="#painting">Painting</a>
-          <a href="#caulking">Caulking / Apply</a>
-          <a href="#rope-access">Rope Access</a>
-          <a href="#leak-repair">Leaking Repair</a>
+        <div class="hero-visual reveal delay-1" role="img" aria-label="Main project image">
+          <img src="main-hero.jpg" alt="Bravika exterior maintenance project" loading="eager">
         </div>
       </div>
+    </section>
 
-      <a class="nav-link" href="#company">Company</a>
-      <a class="nav-link" href="#contact">Contact</a>
+    <section class="section credentials" id="rope-access">
+      <div class="container credentials-grid">
+        <div class="reveal">
+          <p class="eyebrow">Rope Access Specialists</p>
+          <h2 class="section-title">Certified high-angle exterior work</h2>
+          <p class="contact-lead">
+            We perform difficult-access exterior maintenance using professional rope
+            access methods to reach high-rise areas safely and efficiently.
+          </p>
+        </div>
 
-      <a class="cta-button" href="https://wa.me/16725582342" target="_blank">
-        Get a Free Quote
-      </a>
-    </nav>
+        <div class="credential-cards reveal delay-1">
+          <article class="credential-card">
+            <h3>IRATA / SPRAT</h3>
+            <p>Rope access standards and procedures for controlled work at height.</p>
+          </article>
+          <article class="credential-card">
+            <h3>WorkSafeBC</h3>
+            <p>Site safety compliance and risk-controlled execution on every project.</p>
+          </article>
+          <article class="credential-card">
+            <h3>Owner-Supervised</h3>
+            <p>Direct oversight, quality checks, and clear communication from start to finish.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  </div>
-</header>
+    <section class="section services" id="services">
+      <div class="container">
+        <p class="eyebrow centered">Our Services</p>
+        <h2 class="section-title centered">Complete exterior solutions</h2>
 
-  <!-- HERO -->
-  <main id="home" class="hero">
-    <div class="hero-content">
-      <h1>BRAVIKA EXTERIOR SERVICES</h1>
-      <p>Professional Rope Access & Exterior Maintenance in BC</p>
+        <div class="card-grid">
+          <article class="service-card reveal">
+            <div class="card-media polyurethane-slider" id="pressure-slider" role="button" tabindex="0" aria-label="Pressure washing gallery, click to view next image">
+              <img id="pressure-image" src="pressure-01.jpg" alt="Pressure washing service in progress" loading="lazy">
+              <span class="poly-label">Click image to view next</span>
+            </div>
+            <h3>Pressure Washing</h3>
+            <p>Deep exterior cleaning for facades, balconies, and hard surfaces.</p>
+          </article>
 
-      <!-- si quieres animación, descomenta estas líneas -->
-      <!-- <img src="animacion.PNG" alt="Bravika Animation" class="hero-animation" /> -->
-    </div>
+          <article class="service-card reveal delay-1">
+            <div class="card-media">
+              <img src="caulking-01.jpg" alt="Leak repair and caulking work" loading="lazy">
+            </div>
+            <h3>Leak Repair and Caulking</h3>
+            <p>Technical sealing to stop water ingress at joints and envelope areas.</p>
+          </article>
+
+          <article class="service-card reveal delay-2">
+            <div class="card-media">
+              <img src="window-01.jpg" alt="Window replacement project" loading="lazy">
+            </div>
+            <h3>Window Replacement</h3>
+            <p>Exterior replacement focused on sealing quality, finish, and durability.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="card-media polyurethane-slider" id="polyurethane-slider" role="button" tabindex="0" aria-label="Polyurethane gallery, click to view next image">
+              <img id="polyurethane-image" src="poly-01.jpg" alt="Polyurethane injection in parkade slab" loading="lazy">
+              <span class="poly-label">Click image to view next</span>
+            </div>
+            <h3>Polyurethane Injection</h3>
+            <p>Polyurethane injection in parkades to stop active water leaks and infiltration.</p>
+          </article>
+
+          <article class="service-card reveal delay-1">
+            <div class="card-media polyurethane-slider" id="membrane-slider" role="button" tabindex="0" aria-label="Waterproofing membrane gallery, click to view next image">
+              <img id="membrane-image" src="membrane-01.jpg" alt="Waterproofing membrane service in progress" loading="lazy">
+              <span class="poly-label">Click image to view next</span>
+            </div>
+            <h3>Waterproofing Membrane</h3>
+            <p>Balcony membrane repair and inspection to prevent leaks and moisture damage.</p>
+          </article>
+
+          <article class="service-card reveal delay-2">
+            <div class="card-media polyurethane-slider" id="painting-slider" role="button" tabindex="0" aria-label="Exterior painting gallery, click to view next image">
+              <img id="painting-image" src="painting-01.JPG" alt="Exterior painting service in progress" loading="lazy">
+              <span class="poly-label">Click image to view next</span>
+            </div>
+            <h3>Exterior Painting</h3>
+            <p>Professional painting services for facades, trim, and exposed exterior areas.</p>
+          </article>
+
+          <article class="service-card reveal delay-1">
+            <div class="card-media polyurethane-slider" id="concrete-slider" role="button" tabindex="0" aria-label="Concrete and crack repair gallery, click to view next image">
+              <img id="concrete-image" src="concrete-01.jpg" alt="Concrete and crack repair service in progress" loading="lazy">
+              <span class="poly-label">Click image to view next</span>
+            </div>
+            <h3>Concrete and Crack Repair</h3>
+            <p>Concrete restoration and crack repair to stop water intrusion and surface deterioration.</p>
+          </article>
+
+          <article class="service-card reveal delay-2">
+            <div class="card-media">
+              <img src="inspection-01.jpg" alt="Building inspection service" loading="lazy">
+            </div>
+            <h3>Building Inspection</h3>
+            <p>Detailed exterior building inspections to identify risks before they become costly repairs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section safety" id="safety">
+      <div class="container safety-grid">
+        <div class="reveal">
+          <p class="eyebrow">Safety First</p>
+          <h2 class="section-title">Why choose Bravika</h2>
+          <ul class="check-list">
+            <li>We protect our workers with strict safety planning and proper equipment.</li>
+            <li>We respect your time with organized scheduling and on-time completion.</li>
+            <li>We protect your budget by delivering durable work done right the first time.</li>
+            <li>We keep your property clean and your routine uninterrupted whenever possible.</li>
+          </ul>
+        </div>
+
+        <div class="safety-visual reveal delay-1" role="img" aria-label="Why choose Bravika image">
+          <img src="why-01.png" alt="Why choose Bravika points" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h2 class="section-title">Request your quote</h2>
+          <p class="contact-lead">
+            Tell us about your project and we will respond with a clear proposal.
+          </p>
+
+          <div class="contact-item">
+            <strong>Phone</strong>
+            <span>+1 (672) 558-2342</span>
+          </div>
+          <div class="contact-item">
+            <strong>Email</strong>
+            <span>bryandlth@hotmail.com</span>
+          </div>
+          <div class="contact-item">
+            <strong>Service Area</strong>
+            <span>Proudly serving Vancouver, Burnaby, North Vancouver, Richmond and surrounding areas</span>
+          </div>
+
+          <div class="whatsapp-box">
+            <strong>WhatsApp Direct</strong>
+            <p>Send us a quick message on WhatsApp for faster follow-up.</p>
+            <a class="btn btn-primary whatsapp-link" href="https://wa.me/16725582342?text=Hi%20Bravika%2C%20I%20need%20a%20quote%20for%20an%20exterior%20project." target="_blank" rel="noopener noreferrer">Open WhatsApp</a>
+          </div>
+        </div>
+
+        <form class="quote-form reveal delay-1">
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" required>
+
+          <label for="phone">Phone Number</label>
+          <input id="phone" name="phone" type="tel" placeholder="(604) 123-4567" required>
+
+          <label for="service">Service Needed</label>
+          <select id="service" name="service" required>
+            <option value="">Select one</option>
+            <option>Pressure Washing</option>
+            <option>Leak Repair and Caulking</option>
+            <option>Window Replacement</option>
+            <option>Polyurethane Injection</option>
+            <option>Waterproofing Membrane</option>
+            <option>Exterior Painting</option>
+            <option>Concrete and Crack Repair</option>
+            <option>Building Inspection</option>
+          </select>
+
+          <label for="details">Project Details</label>
+          <textarea id="details" name="details" rows="4" placeholder="Briefly describe your project"></textarea>
+
+          <label for="whatsapp">WhatsApp Number (Optional)</label>
+          <input id="whatsapp" name="whatsapp" type="tel" placeholder="+1 (604) 123-4567">
+
+          <button type="submit">Send Request</button>
+        </form>
+      </div>
+    </section>
   </main>
-<script>
-  const toggleBtn = document.querySelector(".nav-toggle");
-  const navMenu = document.querySelector(".nav");
 
-  const dropdown = document.querySelector(".dropdown");
-  const dropdownToggle = document.querySelector(".dropdown-toggle");
-  const dropdownMenu = document.querySelector(".dropdown-menu");
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <a class="brand" href="#home" aria-label="Bravika home">
+        <img class="brand-logo" src="logo.PNG" alt="Bravika Exterior Services">
+      </a>
+      <p>Bravika Exterior Services. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      var image = document.getElementById("polyurethane-image");
+      var slider = document.getElementById("polyurethane-slider");
+      if (!image || !slider) return;
 
-  // Abrir/cerrar menú principal (móvil)
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isOpen = navMenu.classList.toggle("is-open");
-    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      var photos = [
+        "poly-01.jpg",
+        "poly-02.jpg",
+        "poly-03.jpg",
+        "poly-04.jpg",
+        "poly-05.jpg",
+        "poly-06.jpg",
+        "poly-07.jpg",
+        "poly-08.jpg",
+        "poly-09.jpg",
+        "poly-10.jpg"
+      ];
 
-    // si cierras el menú, también cierra el dropdown
-    if (!isOpen) dropdown.classList.remove("is-open");
-  });
+      var current = 0;
+      var isAnimating = false;
 
-  // Abrir/cerrar dropdown (móvil)
-  dropdownToggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+      function showNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        slider.classList.add("is-sliding");
 
-    // asegúrate que el menú principal esté abierto
-    navMenu.classList.add("is-open");
-    toggleBtn.setAttribute("aria-expanded", "true");
+        window.setTimeout(function () {
+          current = (current + 1) % photos.length;
+          image.src = photos[current];
+        }, 140);
 
-    dropdown.classList.toggle("is-open");
-  });
+        window.setTimeout(function () {
+          slider.classList.remove("is-sliding");
+          isAnimating = false;
+        }, 320);
+      }
 
-  // Cerrar al tocar links (Home/Company/Contact y también links del dropdown)
-  navMenu.querySelectorAll("a.nav-link, a.cta-button, .dropdown-menu a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("is-open");
-      toggleBtn.setAttribute("aria-expanded", "false");
-      dropdown.classList.remove("is-open");
-    });
-  });
+      slider.addEventListener("click", showNext);
+      slider.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showNext();
+        }
+      });
 
-  // Evita que el dropdown se cierre raro cuando tocas dentro del menú
-  dropdownMenu.addEventListener("click", (e) => e.stopPropagation());
+      image.addEventListener("error", function () {
+        slider.classList.add("is-missing");
+      });
+      image.addEventListener("load", function () {
+        slider.classList.remove("is-missing");
+      });
+    })();
 
-  // Tocar fuera cierra todo
-  document.addEventListener("click", () => {
-    navMenu.classList.remove("is-open");
-    toggleBtn.setAttribute("aria-expanded", "false");
-    dropdown.classList.remove("is-open");
-  });
-</script></body>
+    (function () {
+      var image = document.getElementById("pressure-image");
+      var slider = document.getElementById("pressure-slider");
+      if (!image || !slider) return;
+
+      var photos = [
+        "pressure-01.jpg",
+        "pressure-02.jpg",
+        "pressure-03.jpg",
+        "pressure-04.jpg"
+      ];
+
+      var current = 0;
+      var isAnimating = false;
+
+      function showNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        slider.classList.add("is-sliding");
+
+        window.setTimeout(function () {
+          current = (current + 1) % photos.length;
+          image.src = photos[current];
+        }, 140);
+
+        window.setTimeout(function () {
+          slider.classList.remove("is-sliding");
+          isAnimating = false;
+        }, 320);
+      }
+
+      slider.addEventListener("click", showNext);
+      slider.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showNext();
+        }
+      });
+
+      image.addEventListener("error", function () {
+        slider.classList.add("is-missing");
+      });
+      image.addEventListener("load", function () {
+        slider.classList.remove("is-missing");
+      });
+    })();
+
+    (function () {
+      var image = document.getElementById("painting-image");
+      var slider = document.getElementById("painting-slider");
+      if (!image || !slider) return;
+
+      var photos = [
+        "painting-01.JPG",
+        "painting-02.JPG",
+        "painting-03.JPG",
+        "painting-04.jpg",
+        "painting-05.jpg"
+      ];
+
+      var current = 0;
+      var isAnimating = false;
+
+      function showNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        slider.classList.add("is-sliding");
+
+        window.setTimeout(function () {
+          current = (current + 1) % photos.length;
+          image.src = photos[current];
+        }, 140);
+
+        window.setTimeout(function () {
+          slider.classList.remove("is-sliding");
+          isAnimating = false;
+        }, 320);
+      }
+
+      slider.addEventListener("click", showNext);
+      slider.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showNext();
+        }
+      });
+
+      image.addEventListener("error", function () {
+        slider.classList.add("is-missing");
+      });
+      image.addEventListener("load", function () {
+        slider.classList.remove("is-missing");
+      });
+    })();
+
+    (function () {
+      var image = document.getElementById("concrete-image");
+      var slider = document.getElementById("concrete-slider");
+      if (!image || !slider) return;
+
+      var photos = [
+        "concrete-01.jpg",
+        "concrete-02.jpg"
+      ];
+
+      var current = 0;
+      var isAnimating = false;
+
+      function showNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        slider.classList.add("is-sliding");
+
+        window.setTimeout(function () {
+          current = (current + 1) % photos.length;
+          image.src = photos[current];
+        }, 140);
+
+        window.setTimeout(function () {
+          slider.classList.remove("is-sliding");
+          isAnimating = false;
+        }, 320);
+      }
+
+      slider.addEventListener("click", showNext);
+      slider.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showNext();
+        }
+      });
+
+      image.addEventListener("error", function () {
+        slider.classList.add("is-missing");
+      });
+      image.addEventListener("load", function () {
+        slider.classList.remove("is-missing");
+      });
+    })();
+
+    (function () {
+      var image = document.getElementById("membrane-image");
+      var slider = document.getElementById("membrane-slider");
+      if (!image || !slider) return;
+
+      var photos = [
+        "membrane-01.jpg"
+      ];
+
+      var current = 0;
+      var isAnimating = false;
+
+      function showNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+        slider.classList.add("is-sliding");
+
+        window.setTimeout(function () {
+          current = (current + 1) % photos.length;
+          image.src = photos[current];
+        }, 140);
+
+        window.setTimeout(function () {
+          slider.classList.remove("is-sliding");
+          isAnimating = false;
+        }, 320);
+      }
+
+      slider.addEventListener("click", showNext);
+      slider.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showNext();
+        }
+      });
+
+      image.addEventListener("error", function () {
+        slider.classList.add("is-missing");
+      });
+      image.addEventListener("load", function () {
+        slider.classList.remove("is-missing");
+      });
+    })();
+  </script>
+</body>
 </html>
