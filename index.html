@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header" id="home">
+  <div id="home"></div>
+  <header class="site-header">
     <nav class="nav-wrap container">
       <a class="brand" href="#home" aria-label="Bravika home">
         <img class="brand-logo" src="logo.PNG" alt="Bravika Exterior Services">
@@ -25,6 +26,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#safety">Why Us?</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#feedback">Reviews</a></li>
       </ul>
 
       <a class="cta-btn" href="#contact">Get Quote</a>
@@ -211,7 +213,11 @@
           </div>
         </div>
 
-        <form class="quote-form reveal delay-1">
+        <form class="quote-form reveal delay-1" id="quote-form" action="https://formsubmit.co/bryandlth@hotmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Quote Request - Bravika Website">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none">
+
           <label for="name">Full Name</label>
           <input id="name" name="name" type="text" placeholder="Your full name" required>
 
@@ -239,6 +245,52 @@
 
           <button type="submit">Send Request</button>
         </form>
+      </div>
+    </section>
+
+    <section class="section feedback" id="feedback">
+      <div class="container">
+        <p class="eyebrow centered">Client Voice</p>
+        <h2 class="section-title centered">Reviews, Complaints and Suggestions</h2>
+
+        <div class="feedback-grid">
+          <form class="feedback-form" id="feedback-form">
+            <label for="fb-name">Your Name</label>
+            <input id="fb-name" name="fb-name" type="text" placeholder="Your name" required>
+
+            <label for="fb-type">Type</label>
+            <select id="fb-type" name="fb-type" required>
+              <option value="">Select one</option>
+              <option value="review">Review</option>
+              <option value="complaint">Complaint</option>
+              <option value="suggestion">Suggestion</option>
+            </select>
+
+            <label for="fb-rating">Rating (for reviews)</label>
+            <select id="fb-rating" name="fb-rating">
+              <option value="">Not selected</option>
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Very Good</option>
+              <option value="3">3 - Good</option>
+              <option value="2">2 - Fair</option>
+              <option value="1">1 - Poor</option>
+            </select>
+
+            <label for="fb-message">Message</label>
+            <textarea id="fb-message" name="fb-message" rows="5" placeholder="How was the service? Any complaint or suggestion?" required></textarea>
+
+            <button type="submit">Publish Feedback</button>
+          </form>
+
+          <div class="feedback-board">
+            <div class="feedback-head">
+              <h3>What clients are saying</h3>
+              <button type="button" class="feedback-clear" id="feedback-clear">Refresh</button>
+            </div>
+            <p class="feedback-note">New posts appear instantly in this page. <span id="feedback-mode"></span></p>
+            <div id="feedback-list" class="feedback-list"></div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -488,6 +540,197 @@
         slider.classList.remove("is-missing");
       });
     })();
+
+    (function () {
+      var form = document.getElementById("feedback-form");
+      var list = document.getElementById("feedback-list");
+      var clearBtn = document.getElementById("feedback-clear");
+      var modeEl = document.getElementById("feedback-mode");
+      if (!form || !list || !clearBtn || !modeEl) return;
+
+      var storageKey = "bravika_feedback_v1";
+      var supabaseUrl = "https://sogcfllffuymmysghghm.supabase.co"; // Example: https://your-project-id.supabase.co
+      var supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvZ2NmbGxmZnV5bW15c2doZ2htIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3MzQyODEsImV4cCI6MjA4NzMxMDI4MX0.fatVrmau4aox4bp9NVGbQ4sTqWxLwut94v5sLyiKLks"; // Example: eyJ... your anon public key
+      var useRemote = Boolean(supabaseUrl && supabaseAnonKey);
+      var remoteEndpoint = supabaseUrl ? (supabaseUrl + "/rest/v1/feedback_entries") : "";
+
+      modeEl.textContent = useRemote
+        ? "Connected to live database."
+        : "Local mode active (set Supabase keys to publish for everyone).";
+
+      function safeLoad() {
+        try {
+          var raw = window.localStorage.getItem(storageKey);
+          return raw ? JSON.parse(raw) : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function safeSave(items) {
+        try {
+          window.localStorage.setItem(storageKey, JSON.stringify(items));
+        } catch (error) {
+          // Ignore storage errors silently to avoid breaking UX.
+        }
+      }
+
+      function supabaseHeaders(includePrefer) {
+        var headers = {
+          "apikey": supabaseAnonKey,
+          "Authorization": "Bearer " + supabaseAnonKey,
+          "Content-Type": "application/json"
+        };
+        if (includePrefer) headers["Prefer"] = "return=representation";
+        return headers;
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function typeLabel(type) {
+        if (type === "complaint") return "Complaint";
+        if (type === "suggestion") return "Suggestion";
+        return "Review";
+      }
+
+      function render() {
+        var items = safeLoad().slice().reverse();
+        if (!items.length) {
+          list.innerHTML = "<p class=\"feedback-empty\">No feedback yet. Be the first to leave one.</p>";
+          return;
+        }
+
+        list.innerHTML = items.map(function (item) {
+          var stars = item.type === "review" && item.rating
+            ? "<p class=\"feedback-stars\">" + "★".repeat(Number(item.rating)) + "</p>"
+            : "";
+          return (
+            "<article class=\"feedback-item\">" +
+              "<div class=\"feedback-item-head\">" +
+                "<strong>" + escapeHtml(item.name) + "</strong>" +
+                "<span class=\"feedback-type\">" + typeLabel(item.type) + "</span>" +
+              "</div>" +
+              stars +
+              "<p>" + escapeHtml(item.message) + "</p>" +
+              "<small>" + escapeHtml(item.date || "") + "</small>" +
+            "</article>"
+          );
+        }).join("");
+      }
+
+      function normalizeRemote(items) {
+        return (items || []).map(function (row) {
+          var created = row.created_at ? new Date(row.created_at).toLocaleDateString("en-CA") : "";
+          return {
+            name: row.name || "Anonymous",
+            type: row.type || "review",
+            rating: row.rating || "",
+            message: row.message || "",
+            date: created
+          };
+        });
+      }
+
+      function loadRemote() {
+        return fetch(
+          remoteEndpoint + "?select=name,type,rating,message,created_at&order=created_at.desc",
+          { method: "GET", headers: supabaseHeaders(false) }
+        )
+          .then(function (response) {
+            if (!response.ok) throw new Error("Failed to load feedback");
+            return response.json();
+          })
+          .then(function (data) {
+            var normalized = normalizeRemote(data);
+            safeSave(normalized.slice().reverse());
+            render();
+          })
+          .catch(function () {
+            modeEl.textContent = "Live database unavailable. Showing local cache.";
+            render();
+          });
+      }
+
+      function insertRemote(entry) {
+        return fetch(remoteEndpoint, {
+          method: "POST",
+          headers: supabaseHeaders(true),
+          body: JSON.stringify([{
+            name: entry.name,
+            type: entry.type,
+            rating: entry.rating ? Number(entry.rating) : null,
+            message: entry.message
+          }])
+        }).then(function (response) {
+          if (!response.ok) throw new Error("Failed to save feedback");
+          return response.json();
+        });
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var name = (document.getElementById("fb-name") || {}).value || "";
+        var type = (document.getElementById("fb-type") || {}).value || "";
+        var rating = (document.getElementById("fb-rating") || {}).value || "";
+        var message = (document.getElementById("fb-message") || {}).value || "";
+
+        if (!name || !type || !message) return;
+
+        var newEntry = {
+          name: name.trim(),
+          type: type,
+          rating: type === "review" ? rating : "",
+          message: message.trim(),
+          date: new Date().toLocaleDateString("en-CA")
+        };
+
+        if (useRemote) {
+          insertRemote(newEntry)
+            .then(function () {
+              form.reset();
+              return loadRemote();
+            })
+            .catch(function () {
+              modeEl.textContent = "Save failed on live DB. Stored locally instead.";
+              var localItems = safeLoad();
+              localItems.push(newEntry);
+              safeSave(localItems);
+              form.reset();
+              render();
+            });
+        } else {
+          var current = safeLoad();
+          current.push(newEntry);
+          safeSave(current);
+          form.reset();
+          render();
+        }
+      });
+
+      clearBtn.addEventListener("click", function () {
+        if (useRemote) {
+          loadRemote();
+          return;
+        }
+        window.localStorage.removeItem(storageKey);
+        render();
+      });
+
+      if (useRemote) {
+        loadRemote();
+      } else {
+        render();
+      }
+    })();
+
   </script>
 </body>
 </html>
